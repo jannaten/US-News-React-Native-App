@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import {Animated} from 'react-native';
 import {Container, Ball} from './styles';
-
+import {styles} from '../Components/style';
+import {View, Animated} from 'react-native';
 export const Loader = () => {
   const animations = {
     one: new Animated.Value(0),
@@ -45,19 +45,21 @@ export const Loader = () => {
   }, []);
 
   return (
-    <Container>
-      <Ball
-        style={{transform: [{translateY: animations.one}]}}
-        color="#1abc9c"
-      />
-      <Ball
-        style={{transform: [{translateY: animations.two}]}}
-        color="#f1c40f"
-      />
-      <Ball
-        style={{transform: [{translateY: animations.three}]}}
-        color="#e74c3c"
-      />
-    </Container>
+    <View style={styles.loaderContanier}>
+      <Container>
+        <Ball
+          style={{transform: [{translateY: animations.one}]}}
+          color="#1abc9c"
+        />
+        <Ball
+          style={{transform: [{translateY: animations.two}]}}
+          color="#f1c40f"
+        />
+        <Ball
+          style={{transform: [{translateY: animations.three}]}}
+          color="#e74c3c"
+        />
+      </Container>
+    </View>
   );
 };

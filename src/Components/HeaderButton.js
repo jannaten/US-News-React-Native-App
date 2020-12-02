@@ -2,10 +2,10 @@ import React from 'react';
 import {AppText} from './';
 import {TouchableOpacity} from 'react-native';
 
-const AppButton = ({onPress, value, style}) => (
+const HeaderButton = ({style, onPress, value}) => (
   <TouchableOpacity style={style} onPress={onPress}>
     <AppText value={value} />
   </TouchableOpacity>
 );
 
-export default AppButton;
+export default HeaderButton;

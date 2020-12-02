@@ -1,53 +1,58 @@
 import React from 'react';
-import {AppButton} from './';
 import {styles} from './style.js';
 import {getTime} from '../Utils/';
+import {View, Linking} from 'react-native';
 import {StackActions} from '@react-navigation/native';
-import {View, Text, Image, Linking} from 'react-native';
+import {AppButton, AppText, AppImage, NewsItemScreen} from './';
 
 const NewsItem = ({route, navigation}) => {
+  const {el} = route.params;
   const [read, setRead] = React.useState(false);
   const popAction = StackActions.popToTop({n: 1});
-  const {el, index} = route.params;
   return (
-    <View key={index} style={styles.code}>
-      <Text style={styles.newsSource}>{el.source.name}</Text>
-      <Text style={styles.newsTime}>Published at {getTime(el)}</Text>
-      <Text style={styles.newsAuthor}>
-        Authors: {el.author ? el.author : 'unknown'}
-      </Text>
+    <NewsItemScreen style={styles.code}>
+      <AppText style={styles.newsSource} value={el.source.name} />
+      <AppText style={styles.newsTime} value={`Published at ${getTime(el)}`} />
+      <AppText
+        style={styles.newsAuthor}
+        value={`Authors: ${el.author ? el.author : 'unknown'}`}
+      />
       {el.urlToImage ? (
-        <Image source={{uri: `${el.urlToImage}`}} style={styles.imageHolder} />
+        <AppImage
+          source={{uri: `${el.urlToImage}`}}
+          style={styles.imageHolder}
+        />
       ) : null}
-      <Text style={styles.newsTitle}>{el.title}</Text>
+      <AppText style={styles.newsTitle} value={el.title} />
       {el.description ? (
-        <Text style={styles.newsDesc}>{el.description}</Text>
+        <AppText style={styles.newsDesc} value={el.description} />
       ) : null}
       {read ? (
         <>
-          <Text style={styles.newsContent}>
-            {el.content ? el.content : 'No contents found'}
-          </Text>
-          <Text
+          <AppText
+            style={styles.newsContent}
+            value={el.content ? el.content : 'No contents found'}
+          />
+          <AppText
             style={styles.linkColor}
-            onPress={() => Linking.openURL(`${el.url}`)}>
-            Check more details
-          </Text>
+            onPress={() => Linking.openURL(`${el.url}`)}
+            value="Check more details"
+          />
         </>
       ) : null}
       <View style={styles.buttonControl}>
         <AppButton
-          style={styles.readButton}
+          style={styles.ButtonStyle}
           onPress={() => setRead(!read)}
           value={read ? 'read less' : 'read more'}
         />
         <AppButton
-          style={styles.goBack}
+          style={styles.ButtonStyle}
           onPress={() => navigation.dispatch(popAction)}
           value="Go Back"
         />
       </View>
-    </View>
+    </NewsItemScreen>
   );
 };
 

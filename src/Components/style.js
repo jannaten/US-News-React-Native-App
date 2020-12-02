@@ -29,26 +29,21 @@ export const styles = StyleSheet.create({
     height: 200,
     marginVertical: 10,
   },
-  goBack: {
-    width: 70,
+
+  ButtonStyle: {
+    width: 105,
     height: 35,
     padding: 5,
     borderWidth: 1,
+    display: 'flex',
     borderRadius: 10,
     marginVertical: 10,
+    alignItems: 'center',
     borderColor: 'purple',
-  },
-  readButton: {
-    width: 80,
-    height: 35,
-    padding: 5,
-    borderWidth: 1,
-    borderRadius: 10,
-    marginVertical: 10,
-    borderColor: 'purple',
+    justifyContent: 'center',
   },
   buttonControl: {
-    width: '45%',
+    width: '60%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

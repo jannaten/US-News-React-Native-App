@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
-import {NewsListField} from './';
+import {View} from 'react-native';
 import {styles} from './style.js';
 import {url, Loader} from '../Utils/';
-import {Container} from '../Utils/styles';
-import {View, ScrollView} from 'react-native';
+import {NewsListField, NewsListScreen} from './';
+
 const NewsList = ({navigation}) => {
   const [news, setNews] = React.useState([]);
   const [val, setVal] = React.useState(false);
@@ -19,35 +19,29 @@ const NewsList = ({navigation}) => {
     setVisible(!visible);
   }, []);
 
+  const {length, articles} = news;
+
   return (
-    <>
-      <ScrollView>
-        {visible && news.length === 0 ? (
-          <View style={styles.loaderContanier}>
-            <Container>
-              <Loader />
-            </Container>
-          </View>
-        ) : null}
-        {news ? (
-          <View style={styles.container}>
-            {news.articles &&
-              news.articles.map((el, index) => {
-                return (
-                  <NewsListField
-                    el={el}
-                    val={val}
-                    key={index}
-                    index={index}
-                    setVal={setVal}
-                    navigation={navigation}
-                  />
-                );
-              })}
-          </View>
-        ) : null}
-      </ScrollView>
-    </>
+    <NewsListScreen>
+      {visible && length === 0 ? <Loader /> : null}
+      {news ? (
+        <View style={styles.container}>
+          {articles &&
+            articles.map((el, index) => {
+              return (
+                <NewsListField
+                  el={el}
+                  val={val}
+                  key={index}
+                  index={index}
+                  setVal={setVal}
+                  navigation={navigation}
+                />
+              );
+            })}
+        </View>
+      ) : null}
+    </NewsListScreen>
   );
 };
 
