@@ -2,13 +2,11 @@ import React from 'react';
 import {styles} from './style.js';
 import {getTime} from '../Utils/';
 import {View, Linking} from 'react-native';
-import {StackActions} from '@react-navigation/native';
 import {AppButton, AppText, AppImage, NewsItemScreen} from './';
 
 const NewsItem = ({route, navigation}) => {
   const {el} = route.params;
   const [read, setRead] = React.useState(false);
-  const popAction = StackActions.popToTop({n: 1});
   return (
     <NewsItemScreen style={styles.code}>
       <AppText style={styles.newsSource} value={el.source.name} />
@@ -48,7 +46,7 @@ const NewsItem = ({route, navigation}) => {
         />
         <AppButton
           style={styles.ButtonStyle}
-          onPress={() => navigation.dispatch(popAction)}
+          onPress={() => navigation.navigate('NewsList')}
           value="Go Back"
         />
       </View>

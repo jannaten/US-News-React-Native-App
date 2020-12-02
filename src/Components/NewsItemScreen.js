@@ -1,10 +1,12 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 
 const NewsItemScreen = ({key, style, children}) => (
-  <View key={key} style={style}>
-    {children}
-  </View>
+  <ScrollView>
+    <View key={key} style={style}>
+      {children}
+    </View>
+  </ScrollView>
 );
 
 export default NewsItemScreen;
