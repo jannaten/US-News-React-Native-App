@@ -27,18 +27,16 @@ const NewsList = ({navigation}) => {
       {news ? (
         <View style={styles.container}>
           {articles &&
-            articles.map((el, index) => {
-              return (
-                <NewsListField
-                  el={el}
-                  val={val}
-                  key={index}
-                  index={index}
-                  setVal={setVal}
-                  navigation={navigation}
-                />
-              );
-            })}
+            articles.map((el, index) => (
+              <NewsListField
+                el={el}
+                val={val}
+                key={index}
+                index={index}
+                setVal={setVal}
+                navigation={navigation}
+              />
+            ))}
         </View>
       ) : null}
     </NewsListScreen>
