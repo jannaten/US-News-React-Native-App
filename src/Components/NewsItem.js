@@ -7,45 +7,44 @@ import {AppButton, AppText, AppImage, NewsItemScreen} from './';
 const NewsItem = ({route, navigation}) => {
   const {el} = route.params;
   const [read, setRead] = React.useState(false);
+  const {code, newsSource, newsTime, newsAuthor} = styles;
+  const {ButtonStyle, imageHolder, buttonControl} = styles;
+  const {newsTitle, newsDesc, newsContent, linkColor} = styles;
+  const {source, author, urlToImage, title, description, content, url} = el;
   return (
-    <NewsItemScreen style={styles.code}>
-      <AppText style={styles.newsSource} value={el.source.name} />
-      <AppText style={styles.newsTime} value={`Published at ${getTime(el)}`} />
+    <NewsItemScreen style={code}>
+      <AppText style={newsSource} value={source.name} />
+      <AppText style={newsTime} value={`Published at ${getTime(el)}`} />
       <AppText
-        style={styles.newsAuthor}
-        value={`Authors: ${el.author ? el.author : 'unknown'}`}
+        style={newsAuthor}
+        value={`Authors: ${author ? author : 'unknown'}`}
       />
-      {el.urlToImage ? (
-        <AppImage
-          source={{uri: `${el.urlToImage}`}}
-          style={styles.imageHolder}
-        />
+      {urlToImage ? (
+        <AppImage source={{uri: `${urlToImage}`}} style={imageHolder} />
       ) : null}
-      <AppText style={styles.newsTitle} value={el.title} />
-      {el.description ? (
-        <AppText style={styles.newsDesc} value={el.description} />
-      ) : null}
+      <AppText style={newsTitle} value={title} />
+      {description ? <AppText style={newsDesc} value={description} /> : null}
       {read ? (
         <>
           <AppText
-            style={styles.newsContent}
-            value={el.content ? el.content : 'No contents found'}
+            style={newsContent}
+            value={content ? content : 'No contents found'}
           />
           <AppText
-            style={styles.linkColor}
-            onPress={() => Linking.openURL(`${el.url}`)}
+            style={linkColor}
             value="Check more details"
+            onPress={() => Linking.openURL(`${url}`)}
           />
         </>
       ) : null}
-      <View style={styles.buttonControl}>
+      <View style={buttonControl}>
         <AppButton
-          style={styles.ButtonStyle}
+          style={ButtonStyle}
           onPress={() => setRead(!read)}
           value={read ? 'read less' : 'read more'}
         />
         <AppButton
-          style={styles.ButtonStyle}
+          style={ButtonStyle}
           onPress={() => navigation.navigate('NewsList')}
           value="Go Back"
         />
