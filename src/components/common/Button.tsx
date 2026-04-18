@@ -76,9 +76,9 @@ export function Button({
       >
         <Text
           style={[
-            styles.label,
-            styles[`label_${variant}` as keyof typeof styles],
-            styles[`labelSize_${size}` as keyof typeof styles],
+            labelStyles.label,
+            labelStyles[`label_${variant}` as keyof typeof labelStyles],
+            labelStyles[`labelSize_${size}` as keyof typeof labelStyles],
           ]}
         >
           {label}
@@ -103,6 +103,9 @@ const styles = StyleSheet.create({
   size_sm: { paddingHorizontal: spacing.md, paddingVertical: spacing.xs, minHeight: 32 },
   size_md: { paddingHorizontal: spacing.lg, paddingVertical: spacing.sm, minHeight: 44 },
   size_lg: { paddingHorizontal: spacing.xl, paddingVertical: spacing.md, minHeight: 52 },
+});
+
+const labelStyles = StyleSheet.create({
   label: { ...textStyles.bodyMedium },
   label_primary: { color: colors.textInverse },
   label_secondary: { color: colors.textPrimary },

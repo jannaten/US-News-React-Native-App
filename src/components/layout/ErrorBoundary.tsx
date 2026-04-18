@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ErrorInfo } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { ErrorBoundary as ReactErrorBoundary, type FallbackProps } from 'react-error-boundary';
 import { colors } from '@theme/colors';
@@ -7,11 +7,12 @@ import { spacing } from '@theme/spacing';
 import { logger } from '@utils/logger';
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  const message = error instanceof Error ? error.message : 'An unexpected error occurred.';
   return (
     <View style={styles.container} testID="error-boundary-fallback">
       <Text style={styles.icon}>⚠️</Text>
       <Text style={styles.title}>Something went wrong</Text>
-      <Text style={styles.message}>{error.message}</Text>
+      <Text style={styles.message}>{message}</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={resetErrorBoundary}
@@ -23,11 +24,12 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   );
 }
 
-function onError(error: Error, info: { componentStack: string }) {
+function onError(error: unknown, info: ErrorInfo) {
+  const err = error instanceof Error ? error : new Error(String(error));
   logger.error('Uncaught render error', {
-    message: error.message,
-    stack: error.stack,
-    componentStack: info.componentStack,
+    message: err.message,
+    stack: err.stack,
+    componentStack: info.componentStack ?? '',
   });
 }
 

@@ -67,6 +67,9 @@ export const colors = {
 
   bookmarkActive: palette.amber500,
   bookmarkInactive: palette.neutral400,
+
+  white: palette.white,
+  transparent: palette.transparent,
 } as const;
 
 export type ColorToken = keyof typeof colors;
