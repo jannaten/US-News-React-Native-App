@@ -88,6 +88,7 @@
     ],
     "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
     "moduleNameMapper": {
+      "^@env$": "<rootDir>/__mocks__/@env.js",
       "^@components/(.*)$": "<rootDir>/src/components/$1",
       "^@screens/(.*)$": "<rootDir>/src/screens/$1",
       "^@hooks/(.*)$": "<rootDir>/src/hooks/$1",

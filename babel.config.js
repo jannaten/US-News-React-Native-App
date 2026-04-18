@@ -20,15 +20,19 @@ module.exports = {
         },
       },
     ],
-    [
-      'module:react-native-dotenv',
-      {
-        moduleName: '@env',
-        path: '.env',
-        safe: true,
-        allowUndefined: false,
-      },
-    ],
+    ...(process.env.NODE_ENV !== 'test'
+      ? [
+          [
+            'module:react-native-dotenv',
+            {
+              moduleName: '@env',
+              path: '.env',
+              safe: true,
+              allowUndefined: false,
+            },
+          ],
+        ]
+      : []),
     'react-native-reanimated/plugin',
   ],
 };
