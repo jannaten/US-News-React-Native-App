@@ -18,8 +18,8 @@ A production-grade React Native news application showcasing modern mobile engine
 |---|---|---|
 | Language | TypeScript (strict) | Catch bugs at compile time, self-documenting APIs |
 | Navigation | React Navigation v6 (stack + bottom tabs) | Industry standard, typed param lists |
-| Server state | TanStack React Query v4 | Caching, background refetch, infinite scroll built-in |
-| Client state | Zustand v4 | Minimal boilerplate, selector-based re-renders |
+| Server state | TanStack React Query v5 | Caching, background refetch, infinite scroll built-in |
+| Client state | Zustand v5 | Minimal boilerplate, selector-based re-renders |
 | Persistence | AsyncStorage via custom storage wrapper | Resilient, falls back gracefully in test env |
 | HTTP | Axios with interceptors | Unified error handling, request/response logging |
 | Testing | Jest + React Native Testing Library + MSW | Unit, integration, and API-mock tests |
@@ -69,30 +69,32 @@ __tests__/
 ### 1. Install Dependencies
 
 ```bash
-npm install
+yarn
 ```
 
-> **Native modules note:** `@react-native-async-storage/async-storage` requires native linking.
-> For React Native 0.60+, run `cd ios && pod install` after `npm install`.
+### 2. Install iOS pods
 
-### 2. Configure API Key
-
-Open `src/constants/config.ts` and replace the placeholder with your NewsAPI key:
-
-```ts
-export const NEWS_API_KEY = 'your_key_here';
+```bash
+cd ios && pod install && cd ..
 ```
 
-For production, use [react-native-config](https://github.com/luggit/react-native-config) to load from `.env`.
+### 3. Configure API Key
 
-### 3. Run the App
+Copy `.env.example` to `.env` and add your [newsapi.org](https://newsapi.org/register) key:
+
+```bash
+cp .env.example .env
+# then edit .env and set NEWS_API_KEY=your_key_here
+```
+
+### 4. Run the App
 
 ```bash
 # iOS
-npm run ios
+yarn ios
 
 # Android
-npm run android
+yarn android
 ```
 
 ---
@@ -101,12 +103,12 @@ npm run android
 
 | Command | Description |
 |---|---|
-| `npm test` | Run all tests with coverage |
-| `npm run test:watch` | Tests in watch mode |
-| `npm run lint` | ESLint with zero-warning policy |
-| `npm run typecheck` | TypeScript type checking |
-| `npm run validate` | Full CI check: typecheck + lint + format + test |
-| `npm run format` | Prettier auto-format |
+| `yarn test` | Run all tests with coverage |
+| `yarn test:watch` | Tests in watch mode |
+| `yarn lint` | ESLint with zero-warning policy |
+| `yarn typecheck` | TypeScript type checking |
+| `yarn validate` | Full CI check: typecheck + lint + format + test |
+| `yarn format` | Prettier auto-format |
 
 ---
 
@@ -183,18 +185,6 @@ Every API response, navigation param, component prop, and store action is typed.
 GitHub Actions runs on every push: TypeScript check → ESLint (zero-warning policy) → Prettier format check → Jest with coverage upload to Codecov.
 
 Husky pre-commit hook runs lint-staged to prevent unlinted code from ever being committed.
-
----
-
-## Upgrading React Native
-
-The current native shell targets React Native **0.63.3** (the original version). To fully realize the updated package.json dependencies (including React Navigation v6, Reanimated v3, etc.), run:
-
-```bash
-npx react-native upgrade
-```
-
-All application TypeScript code is written against current APIs and requires no changes for the upgrade.
 
 ---
 
