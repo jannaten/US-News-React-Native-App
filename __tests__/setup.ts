@@ -32,14 +32,3 @@ jest.mock('react-native-reanimated', () =>
   require('react-native-reanimated/mock'),
 );
 
-// Suppress React warning noise in test output
-const originalConsoleError = console.error;
-beforeAll(() => {
-  console.error = (...args: unknown[]) => {
-    if (typeof args[0] === 'string' && args[0].includes('Warning:')) return;
-    originalConsoleError(...args);
-  };
-});
-afterAll(() => {
-  console.error = originalConsoleError;
-});
