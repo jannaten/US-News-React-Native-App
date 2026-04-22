@@ -61,3 +61,5 @@ buck-out/
 # Environment variables
 .env
 .env.local
+
+coverage/
